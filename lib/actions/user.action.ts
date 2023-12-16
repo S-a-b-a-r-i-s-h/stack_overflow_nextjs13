@@ -12,7 +12,7 @@ export async function getUserById(params: any){
 
         const { userId } = params;
 
-        const user = await User.findOne({ clerkId: userId }).maxTimeMS(30000);;
+        const user = await User.findOne({ clerkId: userId });
         return user;
     } catch (error) {
         console.log(error);
@@ -60,7 +60,7 @@ export async function deleteUser(params: DeleteUserParams){
         // and questions, answers, comments, etc.
 
         // get user question ids
-        // const userQuestionIds = await Question.find({ author: user._id }).select('_id').distinct('_id');
+        // const userQuestionIds = await Question.find({ author: user._id }).distinct('_id');
 
         // delete user questions
         await Question.deleteMany({ author: user._id });
