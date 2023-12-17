@@ -8,7 +8,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const Page = async () => {
-    const result = await getAllUsers();
+    const result = await getAllUsers({});
 
   return (
     <>

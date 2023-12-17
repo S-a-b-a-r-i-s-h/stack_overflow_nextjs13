@@ -1,7 +1,6 @@
 import { getTopInteractedTags } from "@/lib/actions/tag.actions";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import RenderTag from "../shared/RenderTag";
 import { Badge } from "../ui/badge";
 
