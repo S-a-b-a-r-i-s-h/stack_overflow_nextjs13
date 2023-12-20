@@ -6,6 +6,7 @@ import Link from "next/link";
 import React from "react";
 import Filter from "./Filter";
 import ParseHTML from "./ParseHTML";
+import Votes from "./Votes";
 
 interface Props {
   questionId: string;
@@ -28,12 +29,12 @@ const AllAnswers = async ({
     <div className="mt-11">
       <div className="flex items-center justify-between">
         <h3 className="primary-text-gradient">
-          {totalAnswers}{" "}
+          
           {totalAnswers === 0
             ? " No Answer"
             : totalAnswers === 1
-            ? " Answer"
-            : " Answers"}{" "}
+            ? totalAnswers + " Answer"
+            : totalAnswers + " Answers"}{" "}
         </h3>
 
         <Filter filters={AnswerFilters} />
@@ -65,7 +66,15 @@ const AllAnswers = async ({
                   </div>
                 </Link>
                 <div className="flex justify-end">
-                    VOTING
+                  <Votes 
+                    type="Answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(userId)}
+                    upvotes={answer.upvotes.length}
+                    hasupVoted={answer.upvotes.includes(userId)}
+                    downvotes={answer.downvotes.length}
+                    hasdownVoted={answer.downvotes.includes(userId)}
+                  />
                 </div>
               </div>
             </div>
