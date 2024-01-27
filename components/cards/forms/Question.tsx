@@ -19,13 +19,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validations";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 
-const type:any = "create"
+const type: any = "create";
 
 interface Props {
   mongoUserId: string;
@@ -51,7 +51,7 @@ const Question = ({ mongoUserId }: Props) => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
-    
+
     try {
       // make an async call to your API -> create a question
       // contain all form data
@@ -65,9 +65,8 @@ const Question = ({ mongoUserId }: Props) => {
       });
 
       // navigate to home page
-      router.push('/');
+      router.push("/");
     } catch (error) {
-      
     } finally {
       setIsSubmitting(false);
     }
@@ -90,22 +89,21 @@ const Question = ({ mongoUserId }: Props) => {
             message: "Tag must be less than 15 characters.",
           });
         }
-        if(!field.value.includes(tagValue as never)){
-          form.setValue('tags',[...field.value,tagValue]);
-          tagInput.value = ''
-          form.clearErrors('tags');
+        if (!field.value.includes(tagValue as never)) {
+          form.setValue("tags", [...field.value, tagValue]);
+          tagInput.value = "";
+          form.clearErrors("tags");
         }
-      }
-      else{
+      } else {
         form.trigger();
       }
     }
   };
 
-  const handleTagRemove = (tag:string, field:any) => {
-    const newTags = field.value.filter((t:string) => t !== tag)
-    form.setValue('tags',newTags);
-  }
+  const handleTagRemove = (tag: string, field: any) => {
+    const newTags = field.value.filter((t: string) => t !== tag);
+    form.setValue("tags", newTags);
+  };
 
   return (
     <Form {...form}>
@@ -180,8 +178,8 @@ const Question = ({ mongoUserId }: Props) => {
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist ",
                     content_style: "body { font-family:Inter; font-size:16px }",
-                    skin: mode === 'dark' ? 'oxide-dark' : 'oxide',
-                    content_css: mode === 'dark' ? 'dark' : 'light',
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>
@@ -211,14 +209,14 @@ const Question = ({ mongoUserId }: Props) => {
                   />
                   {field.value.length > 0 && (
                     <div className="flex-start mt-2.5 gap-2.5">
-                      {field.value.map((tag:any) => (
-                        <Badge 
+                      {field.value.map((tag: any) => (
+                        <Badge
                           key={tag}
                           className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
-                          onClick={() => handleTagRemove(tag,field)}                         
+                          onClick={() => handleTagRemove(tag, field)}
                         >
                           {tag}
-                          <Image 
+                          <Image
                             src="/assets/icons/close.svg"
                             alt="Close Icon"
                             width={12}
@@ -239,15 +237,15 @@ const Question = ({ mongoUserId }: Props) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="primary-gradient w-fit !text-light-900" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="primary-gradient w-fit !text-light-900"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
-            <>
-              {type === 'edit' ? "Editing..." : "Posting..."}
-            </>
-          ): (
-            <>
-              {type === 'edit' ? "Edit Question" : "Ask a Question"}
-            </>
+            <>{type === "edit" ? "Editing..." : "Posting..."}</>
+          ) : (
+            <>{type === "edit" ? "Edit Question" : "Ask a Question"}</>
           )}
         </Button>
       </form>

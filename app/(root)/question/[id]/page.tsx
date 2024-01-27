@@ -1,4 +1,4 @@
-import Answer from "@/components/forms/Answer";
+import Answer from "@/components/cards/forms/Answer";
 import AllAnswers from "@/components/shared/AllAnswers";
 import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
