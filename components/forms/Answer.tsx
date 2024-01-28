@@ -10,14 +10,14 @@ import { usePathname } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../../ui/button";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "../../ui/form";
+} from "../ui/form";
 
 interface Props {
   question: string;
