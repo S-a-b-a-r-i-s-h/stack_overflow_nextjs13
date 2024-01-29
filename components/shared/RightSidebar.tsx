@@ -1,29 +1,15 @@
+import { getHotQuestions } from "@/lib/actions/question.action";
+import { getTopPopularTags } from "@/lib/actions/tag.action";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import RenderTag from "./RenderTag";
 
-const RightSidebar = () => {
-  const hotQuestions = [
-    { _id: '1', title: "How do I use express as a custom server in NextJS?" },
-    { _id: '2', title: "Cascading Deletes in SQLAlchemy?" },
-    { _id: '3', title: "How to Perfectly Center a Div with Tailwind CSS?" },
-    {
-      _id: '4',
-      title:
-        "Best practices for data fetching in a Next.js application with Server-Side Rendering (SSR)?",
-    },
-    { _id: '5', title: "Redux Toolkit Not Updating State as Expected" },
-  ];
-
-  const popularTags = [
-    { _id: '1', name: "javascript", totalQuestions: 5 },
-    { _id: '2', name: "react", totalQuestions: 5 },
-    { _id: '3', name: "next", totalQuestions: 5 },
-    { _id: '4', name: "vue", totalQuestions: 2 },
-    { _id: '5', name: "redux", totalQuestions: 10 },
-  ];
-
+const RightSidebar = async () => {
+  
+  const hotQuestions = await getHotQuestions();
+  const popularTags = await getTopPopularTags();
+  
   return (
     <section
       className="background-light900_dark200 light-border
@@ -34,9 +20,9 @@ const RightSidebar = () => {
       <div>
         <h3 className="h3-bold text-dark200_light900">Top Questions</h3>
         <div className="mt-7 flex w-full flex-col gap-7">
-          {hotQuestions.map((question) => (
+          {hotQuestions && hotQuestions.map((question) => (
             <Link
-              href={`/questions/${question._id}`}
+              href={`/question/${question._id}`}
               key={question._id}
               className="flex cursor-pointer items-center justify-between gap-7"
             >
@@ -52,6 +38,9 @@ const RightSidebar = () => {
               />
             </Link>
           ))}
+          {!hotQuestions && (
+            <h2>No Questions Yet</h2>
+          )}
         </div>
       </div>
       <div className="mt-16">
@@ -62,7 +51,7 @@ const RightSidebar = () => {
               key={tag._id}
               _id={tag._id}
               name={tag.name}
-              totalQuestions={tag.totalQuestions}
+              totalQuestions={tag.numberOfQuestions}
               showCount
             />
           ))}
