@@ -4,16 +4,19 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
+import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 
  
-export default async function Collection() {
+export default async function Collection({ searchParams }: SearchParamsProps) {
   
   const { userId } = auth();
   if(!userId) return null;
 
   const result = await getSavedQuestions({
     clerkId: userId,
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
   // console.log(result.questions)
 
@@ -23,7 +26,7 @@ export default async function Collection() {
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar 
-          route="/"
+          route={`/collection`}
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Search for questions"
@@ -34,10 +37,10 @@ export default async function Collection() {
           otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
-      <div className="mt-10 flex w-full flex-col gap-6">
+      <div className="mt-10 flex w-full flex-col gap-6 border-0">
         {result.questions.length > 0 
         ?
-        result.questions.map((question) => (
+        result.questions.map((question: any) => (
           <QuestionCard 
             key={question._id}
             _id={question._id}

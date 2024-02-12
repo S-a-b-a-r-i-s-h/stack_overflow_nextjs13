@@ -22,7 +22,7 @@ interface QuestionProps {
   views: number;
   answers: Array<object>;
   createdAt: Date;
-  clerkId?: string | null;
+  clerkId?: string;
 }
 
 const QuestionCard = ({
@@ -38,7 +38,7 @@ const QuestionCard = ({
 }: QuestionProps) => {
   const showActionButtons = clerkId && clerkId === author.clerkId;
   return (
-    <div className="card-wrapper rounded-[10px] border-2 p-9 dark:border-none sm:px-11 mt-4">
+    <div className="card-wrapper rounded-[10px] p-9 dark:border-none sm:px-11 mt-4">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
         <div>
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
@@ -50,7 +50,6 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
-        {/* If signed in add edit delete actions */}
 
         <SignedIn>
           {showActionButtons && (
