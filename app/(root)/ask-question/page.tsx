@@ -6,7 +6,7 @@ import React from "react";
 
 const page = async () => {
   //  const { userId } = auth();
-  const userId = "CL123456";
+  const userId = "clerk123";
   if (!userId) redirect("/sign-in");
 
   const mongoUser = await getUserById({userId});
