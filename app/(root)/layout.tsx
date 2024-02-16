@@ -4,6 +4,7 @@ import RightSidebar from '@/components/shared/RightSidebar'
 import React from 'react'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  console.log("pushing");
   return (
     <main className="background-light850_dark100">
         <Navbar />
@@ -15,7 +16,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     {children}
                 </div>
             </section>
-
+            
             <RightSidebar />
         </div>
         toaster
