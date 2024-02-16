@@ -24,7 +24,7 @@ export async function getUserById(params: any) {
 
     const { userId } = params;
     const user = await User.findOne({ clerkId: userId });
-
+    // console.log(user)
     return user;
   } catch (error) {
     console.log(error);
@@ -37,7 +37,7 @@ export async function createUser(userData: CreateUserParams) {
     connectToDatabase();
 
     const newUser = await User.create(userData);
-
+    console.log(newUser)
     return newUser;
   } catch (error) {
     console.log(error);
