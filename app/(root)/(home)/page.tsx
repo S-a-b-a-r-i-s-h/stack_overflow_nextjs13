@@ -16,7 +16,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
     searchQuery: searchParams.q,
     filter: searchParams.filter,
   });
-  console.log(result.questions)
+  // console.log(result.questions)
 
   return (
     <>
