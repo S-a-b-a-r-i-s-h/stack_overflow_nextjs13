@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Filter from "./Filter";
+import Pagination from "./Pagination";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
 
@@ -15,13 +16,7 @@ interface Props {
   page?: number;
   filter?: string;
 }
-const AllAnswers = async ({
-  questionId,
-  userId,
-  totalAnswers,
-  page,
-  filter,
-}: Props) => {
+const AllAnswers = async ({ questionId, userId, totalAnswers, page, filter}: Props) => {
   const result = await getAnswers({
     questionId,
     page: page ? +page : 1,
@@ -83,6 +78,13 @@ const AllAnswers = async ({
               <ParseHTML data={answer.content} />
           </article>
         ))}
+      </div>
+
+      <div className="mt-10">
+        <Pagination 
+          pageNumber={page ? +page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </div>
   );
