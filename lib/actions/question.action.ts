@@ -9,6 +9,7 @@ import { revalidatePath } from "next/cache";
 import Answer from "@/database/answer.model";
 import Interaction from "@/database/interaction.model";
 import { FilterQuery } from "mongoose";
+import { log } from "console";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -93,12 +94,19 @@ export async function createQuestion(params: CreateQuestionParams) {
     });
 
     // Create an interaction record for the user's ask_question action
+    await Interaction.create({
+      user: author,
+      action: "ask_question",
+      question: question._id,
+      tags: tagDocuments
+    })
     
     // Increment author's reputation by +5 for creating a question
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 }});
 
     revalidatePath(path)
   } catch (error) {
-    
+    console.log(error);
   }
 }
 
@@ -144,8 +152,12 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
       throw new Error("Question not found");
     }
 
-    // Increment author's reputation
-
+    // Increment author's reputation by +10/-10 for receiving an upvote/downvote
+    console.log(hasupVoted);
+    
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasupVoted ? -10 : 10 }
+    })
     revalidatePath(path);
   } catch (error) {
     console.log(error);
