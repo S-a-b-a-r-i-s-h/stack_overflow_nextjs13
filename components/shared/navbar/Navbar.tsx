@@ -28,7 +28,9 @@ const Navbar = () => {
         </p>
       </Link>
 
-      <GlobalSearch />
+      <GlobalSearch 
+        route="/"
+      />
 
       <div className="flex-between gap-5">
         <Theme />
