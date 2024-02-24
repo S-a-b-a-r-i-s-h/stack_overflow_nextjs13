@@ -21,7 +21,7 @@ export async function getQuestions(params: GetQuestionsParams) {
         throw error;
     }
 }
-
+//checking the error
 export async function createQuestion(params: CreateQuestionParams) {
   // eslint-disable-next-line no-empty
   try {
