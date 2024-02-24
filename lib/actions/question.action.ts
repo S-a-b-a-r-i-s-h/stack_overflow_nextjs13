@@ -147,13 +147,12 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
     }
 
     const question = await Question.findByIdAndUpdate(questionId, updateQuery, { new: true });
-
+    
     if(!question) {
       throw new Error("Question not found");
     }
 
     // Increment author's reputation by +10/-10 for receiving an upvote/downvote
-    console.log(hasupVoted);
     
     await User.findByIdAndUpdate(question.author, {
       $inc: { reputation: hasupVoted ? -10 : 10 }
@@ -174,7 +173,7 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     let updateQuery = {};
 
     if(hasdownVoted) {
-      updateQuery = { $pull: { downvote: userId }}
+      updateQuery = { $pull: { downvotes: userId }}
     } else if (hasupVoted) {
       updateQuery = { 
         $pull: { upvotes: userId },
@@ -190,7 +189,11 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
       throw new Error("Question not found");
     }
 
-    // Increment author's reputation
+    // Increment author's reputation by +10/-10 for receiving an upvote/downvote
+    console.log(hasdownVoted);
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasdownVoted ? 10 : -10 }
+    })
 
     revalidatePath(path);
   } catch (error) {
