@@ -9,7 +9,12 @@ import { HomePageFilters } from "@/constants/filters";
 import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
-import Loading from "./loading";
+
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Home | Dev Overflow',
+  description: 'Dev Overflow is a community of developers, where you can ask questions, share your knowledge and learn from others. Join us and be a part of the community.'
+}
 
  
 export default async function Home({ searchParams }: SearchParamsProps) {
