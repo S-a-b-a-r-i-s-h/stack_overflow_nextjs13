@@ -9,6 +9,7 @@ import { formatAndDivideNumber } from '@/lib/utils';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { toast } from '../ui/use-toast';
 
 interface Props {
   type: string;
@@ -39,6 +40,11 @@ const Votes = ({
       questionId: JSON.parse(itemId),
       path: pathname,
     })
+    // TODO: show a toast
+    return toast({
+      className:`${!hasSaved ? 'bg-primary-100 text-primary-500' : 'bg-red-100 text-red-900'}`,
+      title: `${!hasSaved ? 'Saved in' : 'Removed from'} your collection !`,
+    })
   }
   const handleVote = async (action: string) => {
     if(!userId) {
@@ -66,7 +72,11 @@ const Votes = ({
       }
 
       // TODO: show a toast
-      return;
+      return toast({
+        className:`${!hasupVoted ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`,
+        title: `Upvote ${!hasupVoted ? 'Successful' : 'Removed'} !`,
+        variant: !hasupVoted ? 'default' : 'destructive',
+      })
     }
 
     if(action === 'downvote') {
@@ -90,7 +100,11 @@ const Votes = ({
       }
 
       // TODO: show a toast
-      return;
+      return toast({
+        className:`${!hasdownVoted ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900'}`,
+        title: `Downvote ${!hasdownVoted ? 'Successful' : 'Removed'} !`,
+        // variant: !hasdownVoted ? 'default' : 'destructive',
+      })
     }
   }
 
