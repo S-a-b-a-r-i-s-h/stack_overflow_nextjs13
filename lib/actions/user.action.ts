@@ -15,7 +15,7 @@ import {
 import { revalidatePath } from "next/cache";
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-import mongoose, { FilterQuery } from "mongoose";
+import { FilterQuery } from "mongoose";
 import Answer from "@/database/answer.model";
 import { BadgeCriteriaType } from "@/types";
 import { assignBadges } from "../utils";

@@ -1,6 +1,5 @@
 import { formatAndDivideNumber } from "@/lib/utils";
 import { BadgeCounts } from "@/types";
-import { BadgeSwissFranc } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 

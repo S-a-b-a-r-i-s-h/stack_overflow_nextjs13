@@ -2,7 +2,6 @@
 
 import { Input } from "@/components/ui/input";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
-import { clear } from "console";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
