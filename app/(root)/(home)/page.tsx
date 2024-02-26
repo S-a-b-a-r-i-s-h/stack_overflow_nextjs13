@@ -20,8 +20,8 @@ export const metadata: Metadata = {
  
 export default async function Home({ searchParams }: SearchParamsProps) {
 
-  const { userId } = auth()
-  let result;
+  const { userId } = auth();
+  let result: any;
   if(searchParams?.filter === 'recommended') {
     if(userId) {
       result = await getRecommendedQuestions({
@@ -75,7 +75,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
       <div className="mt-10 flex w-full flex-col gap-6">
         {result.questions.length > 0 
         ?
-        result.questions.map((question) => (
+        result.questions.map((question: any) => (
           <QuestionCard 
             key={question._id}
             _id={question._id}
