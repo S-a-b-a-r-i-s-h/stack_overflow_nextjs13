@@ -9,7 +9,6 @@ import { revalidatePath } from "next/cache";
 import Answer from "@/database/answer.model";
 import Interaction from "@/database/interaction.model";
 import { FilterQuery } from "mongoose";
-import { log } from "console";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
