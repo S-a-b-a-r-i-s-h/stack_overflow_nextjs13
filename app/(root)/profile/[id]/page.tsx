@@ -13,7 +13,7 @@ import Link from 'next/link';
 import React from 'react'
 
 const Page = async ({params, searchParams}: URLProps) => {
-  const {userId: clerkId}: string | null= auth();
+  const {userId: clerkId}= auth();
   const userInfo = await getUserInfo({userId: params.id});
   return (
     <>
