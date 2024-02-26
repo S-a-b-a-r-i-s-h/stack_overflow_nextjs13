@@ -22,10 +22,16 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
     // Find interactions for the user and group of tags...
     // Interaction...
 
-    return [
-      { _id: "1", name: "tag" },
-      { _id: "2", name: "tag2" },
-    ];
+    // retrieve the tags from the question of a user
+    const tags = await Tag.find({user})
+      .sort({ questions: -1 })
+      .limit(2)
+
+    // return [
+    //   { _id: "1", name: "tag" },
+    //   { _id: "2", name: "tag2" },
+    // ];
+    return tags;
   } catch (error) {
     console.log(error);
     throw error;
