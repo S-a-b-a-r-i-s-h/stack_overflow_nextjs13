@@ -14,8 +14,8 @@ export const connectToDatabase = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URL, {
-      dbName: "DevFloww",
-      // dbName: "devflow",
+      // dbName: "DevFloww",
+      dbName: "devflow",
     });
 
     isConnected = true;
