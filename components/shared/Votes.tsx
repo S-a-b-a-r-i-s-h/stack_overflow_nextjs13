@@ -53,6 +53,7 @@ const Votes = ({
     }
     if(action === 'upvote') {
       if(type === 'Question') {
+        console.log(JSON.parse(itemId), JSON.parse(userId), hasupVoted, hasdownVoted, pathname)
         await upvoteQuestion({
           questionId: JSON.parse(itemId),
           userId: JSON.parse(userId),

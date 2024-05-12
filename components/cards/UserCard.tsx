@@ -38,7 +38,7 @@ const UserCard = async ({ user }: Props) => {
           </p>
         </div>
 
-        <div className="mt-5">
+        {/* <div className="mt-5">
           {interactedTags.length > 0 ? (
             <div className="flex items-center gap-2">
               {interactedTags.map((tag) => (
@@ -48,7 +48,7 @@ const UserCard = async ({ user }: Props) => {
           ) : (
             <Badge>No tags yet</Badge>
           )}
-        </div>
+        </div> */}
       </article>
     </Link>
   );

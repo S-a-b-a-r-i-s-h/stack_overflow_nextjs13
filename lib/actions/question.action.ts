@@ -65,7 +65,7 @@ export async function getQuestions(params: GetQuestionsParams) {
 export async function createQuestion(params: CreateQuestionParams) {
   try {
     connectToDatabase();
-
+    
     const { title, content, tags, author, path } = params;
 
     // Create the question
@@ -74,7 +74,7 @@ export async function createQuestion(params: CreateQuestionParams) {
       content,
       author
     });
-
+    console.log(question);
     const tagDocuments = [];
 
     // Create the tags or get them if they already exist
