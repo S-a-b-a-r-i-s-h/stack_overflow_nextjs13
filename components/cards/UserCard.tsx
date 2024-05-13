@@ -1,8 +1,8 @@
 import { getTopInteractedTags } from "@/lib/actions/tag.action";
 import Image from "next/image";
 import Link from "next/link";
-import RenderTag from "../shared/RenderTag";
-import { Badge } from "../ui/badge";
+// import RenderTag from "../shared/RenderTag";
+// import { Badge } from "../ui/badge";
 
 interface Props {
   user: {
